@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 flex flex-col items-center p-6">
+  <h1 class="text-4xl font-bold text mb-4">Pokédex</h1>
+
+  <p id="info-count" class="text-gray-700 mb-4"></p>
+
+  <div id="pokemon-info" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full max-w-6xl">
+    Cargando...
+  </div>
+
+  <div id="controls" class="flex gap-4 mt-6"> 
+    <button id="prev" class="px-4 py-2 bg-gray-400 text-white rounded-lg disabled:opacity-50">Anterior</button>
+    <button id="next" class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:opacity-50">Siguiente</button>
+  </div>
+
+</body>
+</html>
