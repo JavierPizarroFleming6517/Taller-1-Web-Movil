@@ -20,7 +20,7 @@ export async function getCripto({page =1, perPage=20, vs="usd"} = {}){
         sparkline: "false", //sin sparkline
         price_change_percentage: "24h" //varia cada 24h
     });
-    const response = await fetch(url);
+    const response = await fetch(`${url}?${qs}`);
     if(!response.ok) throw new Error("Error al obtener las criptomonedas");
     return await response.json();
 
@@ -39,7 +39,7 @@ function coinCard(c) {
       </div>
       <div class="text-right">
         <p class="font-bold">${formatCurrency(c.current_price)}</p>
-        <p class="${color} text-sm">${pct(change)}</p>
+        <p class="${color} text-sm">${porcentaje(change)}</p>
       </div>
     </article>
   `;
@@ -98,7 +98,7 @@ export async function renderCrypto() {
   list.innerHTML = `<div class="animate-pulse py-6 text-center">Cargando criptomonedas…</div>`;
 
   try {
-    const data = await fetchTopCoins({ page: STATE.page, perPage: STATE.perPage });
+    const data = await getCripto({ page: STATE.page, perPage: STATE.perPage });
     STATE.all = data;
     renderList();
   } catch (e) {
@@ -118,7 +118,9 @@ function initCryptoUI() {
 }
 
 // Auto-init si estamos en la página de crypto
-if (document.getElementById("crypto-root")) {
-  initCryptoUI();
-  renderCrypto();
-}
+document.addEventListener('DOMContentLoaded', () => {
+     if (document.getElementById("crypto-root")) {
+       initCryptoUI();
+       renderCrypto();
+     }
+   });
