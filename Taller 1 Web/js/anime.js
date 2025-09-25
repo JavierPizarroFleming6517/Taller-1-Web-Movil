@@ -30,18 +30,18 @@ function animeCard(a) {
     if (cleanSynopsis.length > 30) synopsis = cleanSynopsis;
   }
   return `
-    <li class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 border-b py-4 px-2 sm:px-4">
-      <img src="${a.images?.jpg?.image_url || ''}" alt="${a.title}" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg flex-shrink-0 mb-2 sm:mb-0" loading="lazy">
-      <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center sm:gap-4">
-        <div class="min-w-0">
-          <div class="font-semibold text-base sm:text-lg truncate">${a.title}</div>
-          <div class="text-xs sm:text-sm text-slate-500 mt-1">${formatDate(a.aired?.from)}${a.type ? ` · ${a.type}` : ''}${a.episodes ? ` · ${a.episodes} ep.` : ''}</div>
+    <li class="flex flex-col items-start border rounded-xl bg-white shadow-sm p-4 gap-2 h-full">
+      <img src="${a.images?.jpg?.image_url || ''}" alt="${a.title}" class="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg mx-auto mb-2" loading="lazy">
+      <div class="w-full">
+        <div class="font-semibold text-base sm:text-lg text-center mb-1">${a.title}</div>
+        <div class="text-xs sm:text-sm text-slate-500 text-center mb-2">
+          ${formatDate(a.aired?.from)}${a.type ? ` · ${a.type}` : ''}${a.episodes ? ` · ${a.episodes} ep.` : ''}
         </div>
-        ${synopsis ? `<div class='text-xs sm:text-sm text-slate-600 mt-2 sm:mt-0 sm:ml-4 max-h-24 sm:max-h-20 overflow-hidden break-words leading-snug sm:leading-tight flex-1' style='display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;'>${synopsis}</div>` : ''}
+        ${synopsis ? `<div class='text-xs sm:text-sm text-slate-600 mt-2 break-words leading-snug line-clamp-6'>${synopsis}</div>` : ''}
       </div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mt-3 self-center">
         <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">⭐ ${a.score || 'N/A'}</span>
-        <a href="${a.url}" target="_blank" class="text-blue-600 text-xs sm:text-sm underline ml-2 mt-2 sm:mt-0">Ver</a>
+        <a href="${a.url}" target="_blank" class="text-blue-600 text-xs sm:text-sm underline ml-2">Ver</a>
       </div>
     </li>
   `;
@@ -89,7 +89,7 @@ function renderList() {
   }
 
   list.innerHTML = `
-    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       ${filtered.map(animeCard).join("")}
     </ul>
   `;

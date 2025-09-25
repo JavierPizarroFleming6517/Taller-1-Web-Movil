@@ -1,29 +1,28 @@
-//Estilo para los USD y porcentajes
-function formatCurrency(n){
-    return n?.toLocaleString(undefined, {style: "currency", currency: "USD"}) ?? "-";
+// Estilo para los USD y porcentajes
+function formatCurrency(n) {
+  return n?.toLocaleString(undefined, { style: "currency", currency: "USD" }) ?? "-";
 }
 
-function porcentaje(n){
-    if(n===null || n===undefined) return "-";
-    const sign = n > 0 ? "+" : "";
-    return `${sign}${n.toFixed(2)}%`;
+function porcentaje(n) {
+  if (n === null || n === undefined) return "-";
+  const sign = n > 0 ? "+" : "";
+  return `${sign}${n.toFixed(2)}%`;
 }
 
-//Llamar a la API
-export async function getCripto({page =1, perPage=20, vs="usd"} = {}){
-    const url = "https://api.coingecko.com/api/v3/coins/markets";
-    const qs = new URLSearchParams({
-        vs_currency: vs, //Moneda (usd)
-        order: "market_cap_desc", //Orden por mercado
-        per_page: perPage, //Cuantas monedas traer de la api
-        page,
-        sparkline: "false", //sin sparkline
-        price_change_percentage: "24h" //varia cada 24h
-    });
-    const response = await fetch(`${url}?${qs}`);
-    if(!response.ok) throw new Error("Error al obtener las criptomonedas");
-    return await response.json();
-
+// Llamar a la API
+export async function getCripto({ page = 1, perPage = 20, vs = "usd" } = {}) {
+  const url = "https://api.coingecko.com/api/v3/coins/markets";
+  const qs = new URLSearchParams({
+    vs_currency: vs, // Moneda (usd)
+    order: "market_cap_desc", // Orden por mercado
+    per_page: perPage, // Cuantas monedas traer
+    page,
+    sparkline: "false", // sin sparkline
+    price_change_percentage: "24h" // variación en 24h
+  });
+  const response = await fetch(`${url}?${qs}`);
+  if (!response.ok) throw new Error("Error al obtener las criptomonedas");
+  return await response.json();
 }
 
 // --- Render de tarjetas ---
@@ -47,8 +46,8 @@ function coinCard(c) {
 
 // --- Estado global simple ---
 let STATE = {
-  all: [],          // datos crudos del fetch
-  filtered: [],     // datos tras filtro/búsqueda
+  all: [],
+  filtered: [],
   page: 1,
   perPage: 24
 };
@@ -112,15 +111,13 @@ function initCryptoUI() {
   const sort = document.getElementById("crypto-sort");
   const reload = document.getElementById("crypto-reload");
 
-  search?.addEventListener("input", renderList);  // filtra live
-  sort?.addEventListener("change", renderList);   // re-ordena
-  reload?.addEventListener("click", renderCrypto);// recarga desde API
+  search?.addEventListener("input", renderList);
+  sort?.addEventListener("change", renderList);
+  reload?.addEventListener("click", renderCrypto);
 }
 
 // Auto-init si estamos en la página de crypto
-document.addEventListener('DOMContentLoaded', () => {
-     if (document.getElementById("crypto-root")) {
-       initCryptoUI();
-       renderCrypto();
-     }
-   });
+if (document.getElementById("crypto-root")) {
+  initCryptoUI();
+  renderCrypto();
+}
