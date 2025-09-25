@@ -7,11 +7,62 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="module" src="./js/app.js"></script>
 </head>
-<body class="bg-gray-100 text-gray-900 flex flex-col items-center p-6">
-  <h1 class="text-4xl font-bold mb-4">Categorías de Recetas</h1>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900 min-h-screen">
+  <!-- Header igual a anime.html -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-8">
+          <div class="hidden md:flex space-x-6" id="desktop-menu">
+            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./index.html">Inicio</a>
+            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./pokemones.html">Pokémon</a>
+            <a class="nav-link text-green-600 font-semibold border-b-2 border-green-600" href="./recetas.html">Recetas</a>
+            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./anime.html">Top Anime</a>
+            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./cripto.html">Criptomonedas</a>
+          </div>
+        </div>
+        <!-- Menu mobile button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors" aria-label="Abrir menú">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="md:hidden hidden flex-col space-y-2 mt-4 bg-white rounded-lg shadow-lg p-4">
+        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./index.html">Inicio</a>
+        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./pokemones.html">Pokémon</a>
+        <a class="nav-link text-green-600 font-semibold border-b-2 border-green-600 block" href="./recetas.html">Recetas</a>
+        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./anime.html">Anime</a>
+        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./cripto.html">Criptomonedas</a>
+      </div>
+    </nav>
+  </header>
 
-  <div id="recetas-info" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
-    Cargando...
-  </div>
+  <main class="max-w-7xl mx-auto px-4 py-8" id="recetas-root">
+    <section class="mb-6">
+      <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-green-400 to-blue-600 bg-clip-text text-transparent">
+        Categorías de Recetas
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-1">
+        Explora las categorías de recetas y encuentra inspiración culinaria.
+      </p>
+    </section>
+    <div id="recetas-info" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+      Cargando...
+    </div>
+  </main>
+  <script type="module">
+    // Menú móvil toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn?.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+    // Opcional: cerrar menú al hacer click en un link
+    menu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => menu.classList.add('hidden'));
+    });
+  </script>
 </body>
 </html>

@@ -1,26 +1,14 @@
-
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Criptomonedas</title>
+  <title>Top Anime</title>
   <link rel="stylesheet" href="./styles.css">
-  <script type="module" src="./js/cripto.js"></script>
 </head>
-<<<<<<< Updated upstream
-<body class="bg-slate-50 text-slate-900">
-  <header class="p-4 sticky top-0 bg-white/90 backdrop-blur border-b">
-    <nav class="max-w-5xl mx-auto flex gap-4">
-      <a class="font-semibold" href="./index.html">Inicio</a>
-      <a href="./pokemones.html">Pokémon</a>
-      <a href="./recetas.html">Recetas</a>
-      <a href="./spacex.html">SpaceX</a>
-      <a class="text-blue-600" href="./cripto.html">Criptomonedas</a>
-=======
 <body class="bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900 min-h-screen">
-  <!-- Header -->
+  <!-- Header mejorado -->
   <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
     <nav class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
@@ -29,57 +17,71 @@
             <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./index.html">Inicio</a>
             <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./pokemones.html">Pokémon</a>
             <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./recetas.html">Recetas</a>
-            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./anime.html">Top Anime</a>
-            <a class="nav-link text-blue-600 font-semibold border-b-2 border-blue-600" href="./cripto.html">Criptomonedas</a>
+            <a class="nav-link text-blue-600 font-semibold border-b-2 border-blue-600" href="./anime.html">Top Anime</a>
+            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./cripto.html">Criptomonedas</a>
           </div>
         </div>
+        <!-- Menu mobile button -->
         <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors" aria-label="Abrir menú">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
       </div>
+      <!-- Mobile menu -->
       <div id="mobile-menu" class="md:hidden hidden flex-col space-y-2 mt-4 bg-white rounded-lg shadow-lg p-4">
         <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./index.html">Inicio</a>
         <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./pokemones.html">Pokémon</a>
         <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./recetas.html">Recetas</a>
-        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./anime.html">Anime</a>
-        <a class="nav-link text-blue-600 font-semibold border-b-2 border-blue-600 block" href="./cripto.html">Criptomonedas</a>
+        <a class="nav-link text-blue-600 font-semibold border-b-2 border-blue-600 block" href="./anime.html">Anime</a>
+        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./cripto.html">Criptomonedas</a>
       </div>
->>>>>>> Stashed changes
     </nav>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 py-8" id="crypto-root">
+  <main class="max-w-7xl mx-auto px-4 py-8" id="anime-root">
+    <!-- Segmento: Título y descripción -->
     <section class="mb-6">
-      <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-blue-400 to-slate-600 bg-clip-text text-transparent">
-        Criptomonedas – Top por capitalización
+      <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+        Top Anime
       </h1>
       <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-1">
-        Consulta las principales criptomonedas, filtra y ordena por capitalización, precio o variación.
+          Lista de los animes mejor calificados según MyAnimeList.
       </p>
     </section>
+
+    <!-- Segmento: Controles de búsqueda y orden -->
     <section class="mb-8">
       <div class="flex flex-col sm:flex-row gap-2 md:gap-4 w-full md:w-auto">
-        <input id="crypto-search" type="text" class="w-full sm:w-64 px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder-gray-400" placeholder="Buscar (nombre o símbolo)...">
-        <select id="crypto-sort" class="w-full sm:w-44 px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
-          <option value="market_cap">Capitalización</option>
-          <option value="price">Precio</option>
-          <option value="change">Variación 24h</option>
+        <input id="anime-search" type="text" class="w-full sm:w-64 px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder-gray-400" placeholder="Buscar anime...">
+        <select id="anime-sort" class="w-full sm:w-44 px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
+          <option value="score">⭐ Puntuación</option>
+          <option value="title">📝 Título</option>
+          <option value="year">📅 Año</option>
+          <option value="episodes">🎬 Episodios</option>
         </select>
-        <button id="crypto-reload" class="px-4 py-2 rounded-xl border shadow-sm">Recargar</button>
       </div>
     </section>
-    <section id="crypto-list"></section>
+
+    <!-- Segmento: Lista de animes -->
+    <section id="anime-list">
+      <!-- Aquí se renderiza la lista desde JS -->
+    </section>
+
+    <!-- Listado de animes con grid mejorado -->
+  <section id="anime-list" class="max-w-2xl mx-auto w-full">
+      <!-- Se llena dinámicamente -->
+    </section>
   </main>
   <script type="module">
-    import "./js/cripto.js";
+    import "./js/anime.js";
     // Menú móvil toggle
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
     btn?.addEventListener('click', () => {
       menu.classList.toggle('hidden');
     });
+    // Opcional: cerrar menú al hacer click en un link
     menu?.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => menu.classList.add('hidden'));
     });
