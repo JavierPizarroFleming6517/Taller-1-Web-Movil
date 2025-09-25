@@ -6,5 +6,5 @@
 ## Integrantes
 - Bryan Carvajal - 21.177.361-8  
 - David Pino - 21.274.006-3
-- Javier Pizarro - 
+- Javier Pizarro - 21.213.249-7
 - Fernando Aranda - 20.007.253-7
