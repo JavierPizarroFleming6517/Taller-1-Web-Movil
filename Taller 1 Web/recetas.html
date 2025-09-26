@@ -5,54 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfoMóvil - Recetas</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script type="module" src="./js/app.js"></script>
+  
+  <!-- Paleta de Colores de tu Proyecto -->
+  <style>
+    :root {
+      --color-primary-dark: #2B2D42;
+      --color-primary-medium: #8D99AE;
+      --color-primary-light: #BDBDBD;
+      --color-accent: #EF233C;
+      --color-bg: #D90429;
+      --color-bg2: #f3f3f3;
+      --color-bg3: #ffffff; 
+      --color-bg4: #c2c2c2; 
+    }
+  </style>
+
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900 min-h-screen">
-  <!-- Header igual a anime.html -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
-    <nav class="max-w-7xl mx-auto px-4 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-8">
-          <div class="hidden md:flex space-x-6" id="desktop-menu">
-            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./index.html">Inicio</a>
-            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./pokemones.html">Pokémon</a>
-            <a class="nav-link text-green-600 font-semibold border-b-2 border-green-600" href="./recetas.html">Recetas</a>
-            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./anime.html">Top Anime</a>
-            <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors" href="./cripto.html">Criptomonedas</a>
-          </div>
-        </div>
-        <!-- Menu mobile button -->
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors" aria-label="Abrir menú">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
+<body style="background: linear-gradient(135deg, var(--color-bg3), var(--color-bg4));">
+  
+  <!-- Header con el nuevo estilo -->
+  <header class="w-full bg-[var(--color-primary-dark)] py-4 shadow-lg sticky top-0 z-50">
+    <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <!-- Menú Desktop -->
+      <div class="hidden md:flex items-center space-x-6">
+        <a class="text-gray-300 hover:text-white transition-colors" href="./index.html">Inicio</a>
+        <a class="text-gray-300 hover:text-white transition-colors" href="./pokemones.html">Pokémon</a>
+        <!-- CLASE ACTIVA MOVIDA A "RECETAS" -->
+        <a class="text-white font-bold border-b-2 border-[var(--color-accent)] pb-1" href="./recetas.html">Recetas</a>
+        <a class="text-gray-300 hover:text-white transition-colors" href="./anime.html">Top Anime</a>
+        <a class="text-gray-300 hover:text-white transition-colors" href="./cripto.html">Criptomonedas</a>
+      </div>
+
+      <!-- Botón Menú Móvil -->
+      <div class="md:hidden">
+        <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-300 hover:bg-white/10" aria-label="Abrir menú">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
-      <!-- Mobile menu -->
-      <div id="mobile-menu" class="md:hidden hidden flex-col space-y-2 mt-4 bg-white rounded-lg shadow-lg p-4">
-        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./index.html">Inicio</a>
-        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./pokemones.html">Pokémon</a>
-        <a class="nav-link text-green-600 font-semibold border-b-2 border-green-600 block" href="./recetas.html">Recetas</a>
-        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./anime.html">Anime</a>
-        <a class="nav-link text-gray-600 hover:text-gray-900 transition-colors block" href="./cripto.html">Criptomonedas</a>
-      </div>
     </nav>
+
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-primary-dark)] mt-2">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./index.html">Inicio</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./pokemones.html">Pokémon</a>
+        <!-- CLASE ACTIVA MOVIDA A "RECETAS" -->
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-white bg-white/10" href="./recetas.html">Recetas</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./anime.html">Top Anime</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./cripto.html">Criptomonedas</a>
+      </div>
+    </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 py-8" id="recetas-root">
-    <section class="mb-6">
-      <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-green-400 to-blue-600 bg-clip-text text-transparent">
-        Categorías de Recetas
-      </h1>
-      <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-1">
+  <main class="w-full max-w-7xl mx-auto px-4 py-12" id="recetas-root">
+    <section class="mb-10 text-center">
+      <h1 class="text-4xl font-bold text-[var(--color-primary-dark)] md:text-5xl">Categorías de Recetas</h1>
+      <p class="mt-2 text-lg font-semibold text-[var(--color-primary-dark)]">
         Explora las categorías de recetas y encuentra inspiración culinaria.
       </p>
     </section>
-    <div id="recetas-info" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
-      Cargando...
+    
+    <div id="recetas-info" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+      <!-- Las tarjetas de recetas se renderizan aquí desde JS -->
+      <div class="text-center text-lg text-[var(--color-primary-dark)] col-span-full">Cargando categorías...</div>
+    </div>
+    <div id="controls" class="flex justify-center gap-4 mt-10"> 
+      <button id="prev" class="px-6 py-2 bg-gray-300 text-[var(--color-primary-dark)] font-semibold rounded-lg shadow-md transition-all hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>
+      <button id="next" class="px-6 py-2 bg-[var(--color-accent)] text-white font-semibold rounded-lg shadow-md transition-all hover:bg-[var(--color-bg)] disabled:opacity-50 disabled:cursor-not-allowed">Siguiente</button>
     </div>
   </main>
-  <script type="module">
+
+  <script type="module" src="./js/app.js"></script>
+  <script>
     // Menú móvil toggle
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
