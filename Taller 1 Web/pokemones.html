@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfoMóvil - Pokédex</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Paleta de Colores de tu Proyecto -->
+
   <style>
     :root {
       --color-primary-dark: #2B2D42;
@@ -19,14 +18,12 @@
       --color-bg4: #c2c2c2;
     }
   </style>
-
 </head>
 <body style="background: linear-gradient(135deg, var(--color-bg3), var(--color-bg4));">
-  
-  <!-- Header con el nuevo estilo -->
+
+  <!-- Header -->
   <header class="w-full bg-[var(--color-primary-dark)] py-4 shadow-lg sticky top-0 z-50">
     <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-      <!-- Menú Desktop -->
       <div class="hidden md:flex items-center space-x-6">
         <a class="text-gray-300 hover:text-white transition-colors" href="./index.html">Inicio</a>
         <a class="text-white font-bold border-b-2 border-[var(--color-accent)] pb-1" href="./pokemones.html">Pokémon</a>
@@ -34,16 +31,14 @@
         <a class="text-gray-300 hover:text-white transition-colors" href="./anime.html">Top Anime</a>
         <a class="text-gray-300 hover:text-white transition-colors" href="./cripto.html">Criptomonedas</a>
       </div>
-
-      <!-- Botón Menú Móvil -->
       <div class="md:hidden">
         <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-300 hover:bg-white/10" aria-label="Abrir menú">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m4 6h16"/></svg>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
         </button>
       </div>
     </nav>
-
-    <!-- Menú Móvil Desplegable -->
     <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-primary-dark)] mt-2">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./index.html">Inicio</a>
@@ -56,32 +51,38 @@
   </header>
 
   <main class="w-full max-w-7xl mx-auto px-4 py-12" id="pokemon-root">
-    <section class="mb-10 text-center">
-      <h1 class="text-4xl font-bold text-[var(--color-primary-dark)] md:text-5xl">Pokédex</h1>
-      <p id="info-count" class="mt-2 text-lg font-semibold text-[var(--color-dark)]">
-        <!-- La cantidad de Pokémon se mostrará aquí -->
-      </p>
-    </section>
     
+    <section class="mb-6 text-center">
+      <h1 class="text-4xl font-bold text-[var(--color-primary-dark)] md:text-5xl">Pokédex</h1>
+      <p id="info-count" class="mt-2 text-lg font-semibold text-[var(--color-primary-dark)]"></p>
+    </section>
+
+    <!-- Barra de búsqueda y orden -->
+    <section class="mb-6 flex flex-col sm:flex-row justify-center gap-4 items-center">
+      <input id="pokemon-search" type="text" placeholder="Buscar Pokémon..." class="px-4 py-2 rounded-lg border shadow-sm w-full sm:w-64">
+      <select id="pokemon-sort" class="px-4 py-2 rounded-lg border shadow-sm w-full sm:w-40">
+        <option value="id">ID</option>
+        <option value="name">Nombre</option>
+        <option value="weight">Peso</option>
+      </select>
+      <button id="pokemon-reload" class="px-4 py-2 bg-gray-300 rounded-lg shadow-sm">Recargar</button>
+    </section>
+
+    <!-- Contenedor de tarjetas -->
     <div id="pokemon-info" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full">
-      <!-- Las tarjetas de Pokémon se renderizan aquí desde JS -->
       <div class="text-center text-lg text-[var(--color-primary-dark)] col-span-full">Cargando Pokémon...</div>
     </div>
+
     
-    <div id="controls" class="flex justify-center gap-4 mt-10"> 
-      <button id="prev" class="px-6 py-2 bg-gray-300 text-[var(--color-primary-dark)] font-semibold rounded-lg shadow-md transition-all hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>
-      <button id="next" class="px-6 py-2 bg-[var(--color-accent)] text-white font-semibold rounded-lg shadow-md transition-all hover:bg-[var(--color-bg)] disabled:opacity-50 disabled:cursor-not-allowed">Siguiente</button>
-    </div>
+
   </main>
 
   <script type="module" src="./js/app.js"></script>
   <script>
-    // Menú móvil toggle
+    // Toggle menú móvil
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    btn?.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
+    btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
   </script>
 </body>
 </html>

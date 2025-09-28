@@ -1,12 +1,9 @@
-// Formatea fecha simple - CORREGIDO
 function formatDate(dateString) {
   if (!dateString) return "-";
   const date = new Date(dateString);
   return isNaN(date) ? "-" : date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
-// --- Llamar a la API CORREGIDA ---
-// Llamar a la API de anime
 export async function getAnimeNews({ page = 1, perPage = 20 } = {}) {
     const url = 'https://api.jikan.moe/v4/top/anime';
     const qs = new URLSearchParams({ limit: perPage, page });
@@ -22,7 +19,6 @@ export async function getAnimeNews({ page = 1, perPage = 20 } = {}) {
     }
 }
 
-// --- Render de tarjetas MEJORADO ---
 function animeCard(a) {
   let synopsis = '';
   if (a.synopsis) {
@@ -35,7 +31,7 @@ function animeCard(a) {
       <div class="w-full">
         <div class="font-semibold text-base sm:text-lg text-center mb-1">${a.title}</div>
         <div class="text-xs sm:text-sm text-slate-500 text-center mb-2">
-          ${formatDate(a.aired?.from)}${a.type ? ` · ${a.type}` : ''}${a.episodes ? ` · ${a.episodes} ep.` : ''}
+          ${formatDate(a.aired?.from)}${a.type ? ` · ${a.type}` : ''}${a.episodes ? ` · ${a.episodes} ep.` : ''} 
         </div>
         ${synopsis ? `<div class='text-xs sm:text-sm text-slate-600 mt-2 break-words leading-snug line-clamp-6'>${synopsis}</div>` : ''}
       </div>
@@ -47,7 +43,6 @@ function animeCard(a) {
   `;
 }
 
-// --- Estado global simple ---
 const STATE = {
   all: [],
   filtered: [],
@@ -56,7 +51,6 @@ const STATE = {
   sort: 'score'
 };
 
-// --- Render listado (aplica filtro + orden) MEJORADO ---
 function renderList() {
   const list = document.getElementById("anime-list");
   const search = document.getElementById("anime-search")?.value?.toLowerCase() ?? "";
@@ -95,7 +89,6 @@ function renderList() {
   `;
 }
 
-// --- Cargar datos y preparar eventos MEJORADO ---
 export async function renderAnime() {
     const container = document.getElementById("anime-root");
     if (!container) return;
@@ -120,16 +113,26 @@ export async function renderAnime() {
 function initAnimeUI() {
   const search = document.getElementById("anime-search");
   const sort = document.getElementById("anime-sort");
+  const reloadBtn = document.getElementById("recetas-reload");
+
   if (search) {
     search.addEventListener("input", () => {
       clearTimeout(search.timeout);
       search.timeout = setTimeout(renderList, 300);
     });
   }
+
   sort?.addEventListener("change", renderList);
+
+  if (reloadBtn) {
+    reloadBtn.addEventListener("click", () => {
+      renderAnime();
+      if (search) search.value = '';
+      if (sort) sort.value = STATE.sort;
+    });
+  }
 }
 
-// Auto-init si estamos en la página de anime
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById("anime-root")) {
         initAnimeUI();
