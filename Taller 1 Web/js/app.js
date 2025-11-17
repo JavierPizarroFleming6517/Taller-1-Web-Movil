@@ -109,36 +109,76 @@ function initPokemonsUI() {
   });
 }
 
-// === 5. LÓGICA DE RECETAS (Para API Pública) ===
-// (Esta es la lógica antigua que SÍ funciona)
-function recetaCard(cat) {
+// === 5. LÓGICA DE RECETAS (Tu backend Express + Mongo) ===
+function recetaCard(r) {
+  const nombre = r.nombre || r.strCategory || "Sin título";
+  const categoria = r.categoria || "Sin categoría";
+  const img =
+    r.imagen ||
+    r.strCategoryThumb ||
+    "https://via.placeholder.com/400x260?text=Receta";
+  const descRaw =
+    r.instrucciones || r.strCategoryDescription || "Sin descripción disponible.";
+  const desc =
+    descRaw.length > 140 ? descRaw.slice(0, 140).trim() + "…" : descRaw;
+
   return `
-    <div class="card p-4 bg-white rounded-lg shadow-md text-center">
-      <h3 class="font-bold">${cat.strCategory}</h3>
-      <img src="${cat.strCategoryThumb}" alt="${cat.strCategory}" class="mx-auto mb-2">
-      <p>${cat.strCategoryDescription.substring(0, 100)}...</p>
-    </div>
+    <article class="flex flex-col bg-white rounded-2xl shadow-md overflow-hidden border hover:shadow-lg transition-shadow">
+      <div class="w-full aspect-video overflow-hidden">
+        <img src="${img}" alt="${nombre}" class="w-full h-full object-cover">
+      </div>
+      <div class="p-4 flex flex-col gap-2">
+        <div class="flex items-center justify-between gap-2">
+          <h3 class="font-semibold text-lg text-[var(--color-primary-dark)] truncate">
+            ${nombre}
+          </h3>
+          <span class="text-xs px-2 py-1 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-medium whitespace-nowrap">
+            ${categoria}
+          </span>
+        </div>
+        <p class="text-sm text-slate-600 overflow-hidden">
+          ${desc}
+        </p>
+      </div>
+    </article>
   `;
 }
+
 function renderRecetas() {
   const container = document.getElementById("recetas-info");
   if (!container) return;
+
   const search = STATE.recetas.search.toLowerCase();
-  let filtered = STATE.recetas.all.filter(cat =>
-    cat.strCategory.toLowerCase().includes(search)
+
+  let filtered = STATE.recetas.all.filter((r) => {
+    const nombre = (r.nombre || r.strCategory || "").toLowerCase();
+    const categoria = (r.categoria || "").toLowerCase();
+    return (
+      nombre.includes(search) ||
+      categoria.includes(search)
+    );
+  });
+
+  // Ordenamos por nombre de receta
+  filtered.sort((a, b) =>
+    (a.nombre || a.strCategory || "").localeCompare(
+      b.nombre || b.strCategory || ""
+    )
   );
-  filtered.sort((a, b) => a.strCategory.localeCompare(b.strCategory));
+
   STATE.recetas.filtered = filtered;
+
   container.innerHTML = filtered.length
     ? filtered.map(recetaCard).join("")
-    : `<div class="p-6 text-center text-slate-500 col-span-full">No se encontraron categorías...</div>`;
+    : `<div class="p-6 text-center text-slate-500 col-span-full">No se encontraron recetas…</div>`;
 }
+
 async function loadRecetas() {
   const container = document.getElementById("recetas-info");
   if (!container) return;
-  container.innerHTML = `<div class="p-6 text-center animate-pulse col-span-full">Cargando categorías...</div>`;
+  container.innerHTML = `<div class="p-6 text-center animate-pulse col-span-full">Cargando recetas...</div>`;
   try {
-    const data = await getCategories(); // <-- Llama a la API pública
+    const data = await getCategories(); // ahora trae tus recetas
     STATE.recetas.all = data;
     renderRecetas();
   } catch (e) {
@@ -146,10 +186,12 @@ async function loadRecetas() {
     container.innerHTML = `<div class="p-6 text-center text-red-600 col-span-full">Error al cargar categorías</div>`;
   }
 }
+
 function initRecetasUI() {
   const searchInput = document.getElementById("recetas-search");
   const sortSelect = document.getElementById("recetas-sort");
   const reloadBtn = document.getElementById("recetas-reload");
+
   searchInput?.addEventListener("input", () => {
     clearTimeout(searchInput.timeout);
     searchInput.timeout = setTimeout(() => {
@@ -157,15 +199,19 @@ function initRecetasUI() {
       renderRecetas();
     }, 300);
   });
+
+  // por ahora solo orden por nombre, así que simplemente re-render
   sortSelect?.addEventListener("change", () => {
     renderRecetas();
   });
+
   reloadBtn?.addEventListener("click", () => {
     STATE.recetas.search = "";
     if (searchInput) searchInput.value = "";
     loadRecetas();
   });
 }
+
 
 // === 6. LÓGICA DE ANIME (Para tu Backend NestJS) ===
 // (Esta lógica está actualizada para tu API de Nest)

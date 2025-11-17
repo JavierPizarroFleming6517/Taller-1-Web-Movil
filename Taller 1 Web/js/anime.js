@@ -1,18 +1,60 @@
+const API_BASE_URL = "http://localhost:3000";
+
 function formatDate(dateString) {
   if (!dateString) return "-";
   const date = new Date(dateString);
   return isNaN(date) ? "-" : date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
+function mapApiAnimeToFrontend(a) {
+  return {
+    // títulos
+    title: a.title,
+    title_english: a.title_english ?? "",
+    title_japanese: a.title_japanese ?? "",
+
+    // sinopsis
+    synopsis: a.synopsis,
+
+    // imagen (imitamos estructura de Jikan)
+    images: {
+      jpg: {
+        image_url: a.imageUrl || a.image_url || "",
+      },
+    },
+
+    // datos extra
+    score: a.score ?? null,
+    type: a.type ?? "",
+    episodes: a.episodes ?? 0,
+
+    // fechas
+    aired: {
+      from:
+        a.airedFrom ||
+        a.aired_from ||
+        a.startDate ||
+        a.start_date ||
+        null,
+    },
+
+    // link externo si tienes algo guardado
+    url: a.url || "#",
+  };
+}
+
 export async function getAnimeNews({ page = 1, perPage = 20 } = {}) {
-    const url = 'https://api.jikan.moe/v4/top/anime';
     const qs = new URLSearchParams({ limit: perPage, page });
     
     try {
-        const response = await fetch(`${url}?${qs}`);
+        const response = await fetch(`${API_BASE_URL}/anime?${qs}`);
         if (!response.ok) throw new Error("Error al obtener los animes");
         const data = await response.json();
-        return data.data;
+        const list = Array.isArray(data)
+          ? data
+          : data.data || data.items || [];
+
+        return list.map(mapApiAnimeToFrontend);
     } catch (error) {
         console.error("Error fetching anime:", error);
         throw error;
