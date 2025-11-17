@@ -2,14 +2,14 @@
 
 // === 1. IMPORTACIONES ===
 import { getPokemons } from "./pokemones.js";
-import { getRecetas } from "./recetas.js"; // <-- 💡 Cambiado de getCategories a getRecetas
+import { getRecetas } from "./recetas.js"; // <-- 💡 CAMBIO: Ya no es getCategories
 import { getAnimeNews } from "./anime.js";
 import { getCripto } from "./cripto.js";
 
 // === 2. ESTADO GLOBAL ===
 const STATE = {
   pokemon: { all: [], filtered: [], search: "", sort: "id" },
-  recetas: { all: [], filtered: [], search: "", sort: "name" }, // <-- 'name' sigue siendo válido
+  recetas: { all: [], filtered: [], search: "", sort: "name" }, // 'name' es válido para 'nombre'
   anime:   { all: [], filtered: [], page: 1, perPage: 24, sort: 'score' },
   cripto:  { all: [], filtered: [], page: 1, perPage: 24, sort: 'market_cap' }
 };
@@ -32,7 +32,7 @@ function porcentaje(n) {
 }
 
 // === 4. LÓGICA DE POKÉMON ===
-// (Esta sección no cambia)
+// (Esta sección no cambia, ya funciona con tu backend de FastAPI)
 function pokemonCard(p) {
   return `
     <div class="card p-4 bg-white rounded-lg shadow-md text-center">
@@ -98,17 +98,16 @@ function initPokemonsUI() {
   });
 }
 
-// === 5. LÓGICA DE RECETAS ===
+// === 5. LÓGICA DE RECETAS (ACTUALIZADA) ===
 
-// 💡 CAMBIO: Esta tarjeta ahora muestra una Receta, no una Categoría.
-// Tu modelo de Receta no parece tener imagen, así que la quité.
+// 💡 CAMBIO: Esta tarjeta ahora muestra una Receta de tu API
 function recetaCard(receta) {
   return `
     <div class="card p-4 bg-white rounded-lg shadow-md text-left w-full">
       <h3 class="font-bold text-lg mb-2">${receta.nombre}</h3>
       <p class="font-semibold text-sm mb-1 capitalize">${receta.categoria}</p>
       <p class="text-sm text-slate-600">${(receta.instrucciones || '').substring(0, 100)}...</p>
-      </div>
+    </div>
   `;
 }
 
@@ -120,11 +119,11 @@ function renderRecetas() {
   const search = STATE.recetas.search.toLowerCase();
 
   let filtered = STATE.recetas.all.filter(receta =>
-    receta.nombre.toLowerCase().includes(search)
+    (receta.nombre || '').toLowerCase().includes(search)
   );
 
   // El sort por 'name' (nombre) sigue siendo válido
-  filtered.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  filtered.sort((a, b) => (a.nombre || '').localeCompare(b.nombre || ''));
 
   STATE.recetas.filtered = filtered;
   container.innerHTML = filtered.length
@@ -132,7 +131,7 @@ function renderRecetas() {
     : `<div class="p-6 text-center text-slate-500 col-span-full">No se encontraron recetas...</div>`;
 }
 
-// 💡 CAMBIO: Ahora llama a getRecetas()
+// 💡 CAMBIO: Ahora llama a getRecetas() de tu nuevo js/recetas.js
 async function loadRecetas() {
   const container = document.getElementById("recetas-info");
   if (!container) return;
@@ -174,7 +173,7 @@ function initRecetasUI() {
 }
 
 // === 6. LÓGICA DE ANIME ===
-// (Esta sección no cambia)
+// (Esta sección no cambia, ya funciona con tu backend de NestJS)
 function animeCard(a) {
   let synopsis = '';
   if (a.synopsis) {
