@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>InfoMóvil - Criptomonedas</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  
+  <title>Top Anime</title>
+  <link rel="stylesheet" href="./styles.css">
+
   <!-- Paleta de Colores de tu Proyecto -->
   <style>
     :root {
@@ -22,7 +23,7 @@
 
 </head>
 <body style="background: linear-gradient(135deg, var(--color-bg3), var(--color-bg4));">
-  
+
   <!-- Header con el nuevo estilo -->
   <header class="w-full bg-[var(--color-primary-dark)] py-4 shadow-lg sticky top-0 z-50">
     <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -31,15 +32,13 @@
         <a class="text-gray-300 hover:text-white transition-colors" href="./index.html">Inicio</a>
         <a class="text-gray-300 hover:text-white transition-colors" href="./pokemones.html">Pokémon</a>
         <a class="text-gray-300 hover:text-white transition-colors" href="./recetas.html">Recetas</a>
-        <a class="text-gray-300 hover:text-white transition-colors" href="./anime.html">Top Anime</a>
-        <!-- CLASE ACTIVA MOVIDA A "CRIPTOMONEDAS" -->
-        <a class="text-white font-bold border-b-2 border-[var(--color-accent)] pb-1" href="./cripto.html">Criptomonedas</a>
+        <a class="text-white font-bold border-b-2 border-[var(--color-accent)] pb-1" href="./anime.html">Top Anime</a>
       </div>
 
       <!-- Botón Menú Móvil -->
       <div class="md:hidden">
         <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-300 hover:bg-white/10" aria-label="Abrir menú">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m4 6h16"/></svg>
         </button>
       </div>
     </nav>
@@ -50,45 +49,43 @@
         <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./index.html">Inicio</a>
         <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./pokemones.html">Pokémon</a>
         <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./recetas.html">Recetas</a>
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./anime.html">Top Anime</a>
-        <!-- CLASE ACTIVA MOVIDA A "CRIPTOMONEDAS" -->
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-white bg-white/10" href="./cripto.html">Criptomonedas</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-white bg-white/10" href="./anime.html">Top Anime</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./cripto.html">Criptomonedas</a>
       </div>
     </div>
   </header>
 
-  <main class="w-full max-w-7xl mx-auto px-4 py-12" id="crypto-root">
+  <main class="w-full max-w-7xl mx-auto px-4 py-12" id="anime-root">
+    <!-- Segmento: Título y descripción -->
     <section class="mb-10 text-center">
-      <h1 class="text-4xl font-bold text-[var(--color-primary-dark)] md:text-5xl">Criptomonedas – Top por Capitalización</h1>
-      <p class="mt-2 text-lg font-semibold text-[var(--color-primary-dark]">
-        Consulta las principales criptomonedas, filtra y ordena por sus métricas clave.
-      </p>
+      <h1 class="text-4xl font-bold text-[var(--color-primary-dark)] md:text-5xl">Top Anime</h1>
+      <p class="mt-2 text-lg font-semibold text-[var(--color-primary-dark)]">Lista de los animes mejor calificados según MyAnimeList.</p>
     </section>
 
-    <!-- Controles con el nuevo estilo -->
+    <!-- Segmento: Controles de búsqueda y orden -->
     <section class="mb-10 flex justify-center">
-      <div class="flex flex-col sm:flex-row items-center gap-4 w-full max-w-xl">
-        <input id="crypto-search" type="text" class="w-full rounded-xl border-gray-300 bg-white/80 px-4 py-2 text-[var(--color-primary-dark)] shadow-sm transition-all placeholder:text-gray-400 focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]" placeholder="Buscar (nombre o símbolo)...">
-        <select id="crypto-sort" class="w-full sm:w-56 rounded-xl border-gray-300 bg-white/80 px-4 py-2 text-[var(--color-primary-dark)] shadow-sm transition-all focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]">
-          <option value="market_cap">Capitalización</option>
-          <option value="price">Precio</option>
-          <option value="change">Variación 24h</option>
+      <div class="flex flex-col sm:flex-row gap-4 w-full max-w-xl">
+        <input id="anime-search" type="text" class="w-full rounded-xl border-gray-300 bg-white/80 px-4 py-2 text-[var(--color-primary-dark)] shadow-sm transition-all placeholder:text-gray-400 focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]" placeholder="Buscar anime...">
+        <select id="anime-sort" class="w-full sm:w-56 rounded-xl border-gray-300 bg-white/80 px-4 py-2 text-[var(--color-primary-dark)] shadow-sm transition-all focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]">
+          <option value="score">⭐ Puntuación</option>
+          <option value="title">📝 Título</option>
+          <option value="year">📅 Año</option>
+          <option value="episodes">🎬 Episodios</option>
         </select>
-        <button id="crypto-reload" class="px-6 py-2 bg-gray-300 text-[var(--color-primary-dark)] font-semibold rounded-lg shadow-md transition-all hover:bg-gray-400 whitespace-nowrap">Recargar</button>
+        <button id="recetas-reload" class="px-6 py-2 bg-gray-300 text-[var(--color-primary-dark)] font-semibold rounded-lg shadow-md transition-all hover:bg-gray-400">Recargar</button>
       </div>
     </section>
 
-    <!-- El contenedor de la lista de criptomonedas -->
-    <section id="crypto-list">
-      <div class="text-center text-lg text-[var(--color-primary-dark)]">Cargando datos...</div>
+    <!-- Segmento: Lista de animes -->
+    <section id="anime-list">
+      <!-- Las tarjetas de anime se renderizan aquí desde JS -->
     </section>
+
     
+
   </main>
-
-  
-
-  <script type="module" src="./js/cripto.js"></script>
-  <script>
+  <script type="module">
+    import "./js/anime.js";
     // Menú móvil toggle
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
