@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Ignorar node_modules para la normalización
+mi-app-taller2/node_modules/** -text

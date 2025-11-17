@@ -2,14 +2,14 @@
 
 // === 1. IMPORTACIONES ===
 import { getPokemons } from "./pokemones.js";
-import { getRecetas } from "./recetas.js"; // <-- 💡 CAMBIO: Ya no es getCategories
+import { getCategories } from "./recetas.js";  // <-- Apunta a la API pública de Categorías
 import { getAnimeNews } from "./anime.js";
-import { getCripto } from "./cripto.js";
+import { getCripto } from "./cripto.js";      // <-- Apunta a la API pública
 
 // === 2. ESTADO GLOBAL ===
 const STATE = {
   pokemon: { all: [], filtered: [], search: "", sort: "id" },
-  recetas: { all: [], filtered: [], search: "", sort: "name" }, // 'name' es válido para 'nombre'
+  recetas: { all: [], filtered: [], search: "", sort: "name" }, // Para categorías
   anime:   { all: [], filtered: [], page: 1, perPage: 24, sort: 'score' },
   cripto:  { all: [], filtered: [], page: 1, perPage: 24, sort: 'market_cap' }
 };
@@ -20,20 +20,18 @@ function formatDate(dateString) {
   const date = new Date(dateString);
   return isNaN(date) ? "-" : date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
-
 function formatCurrency(n) {
   return n?.toLocaleString(undefined, { style: "currency", currency: "USD" }) ?? "-";
 }
-
 function porcentaje(n) {
   if (n === null || n === undefined) return "-";
   const sign = n > 0 ? "+" : "";
   return `${sign}${n.toFixed(2)}%`;
 }
 
-// === 4. LÓGICA DE POKÉMON ===
-// (Esta sección no cambia, ya funciona con tu backend de FastAPI)
+// === 4. LÓGICA DE POKÉMON (Para tu Backend FastAPI) ===
 function pokemonCard(p) {
+  // 💡 Tarjeta actualizada para tu modelo: name, id, type, level
   return `
     <div class="card p-4 bg-white rounded-lg shadow-md text-center">
       <h3 class="capitalize font-bold">${p.name}</h3>
@@ -53,7 +51,7 @@ function renderPokemons() {
   );
   filtered.sort((a, b) => {
     if (sort === "name") return a.name.localeCompare(b.name);
-    if (sort === "level") return a.level - b.level;
+    if (sort === "level") return a.level - b.level; // <-- Usa level
     return a.id - b.id;
   });
   STATE.pokemon.filtered = filtered;
@@ -61,23 +59,36 @@ function renderPokemons() {
     ? filtered.map(pokemonCard).join("")
     : `<div class="p-6 text-center text-slate-500 col-span-full">No se encontraron Pokémon...</div>`;
 }
+
+// 💡 ESTA ES LA FUNCIÓN CORREGIDA
 async function loadPokemons() {
   const container = document.getElementById("pokemon-info");
   if (!container) return;
   container.innerHTML = `<div class="p-6 text-center animate-pulse col-span-full">Cargando Pokémon...</div>`;
   try {
-    const data = await getPokemons();
+    // 1. Llama a tu API (que ya tiene CORS)
+    const data = await getPokemons(); // <-- Llama a tu API de FastAPI
+    
+    // 2. Asigna los datos (que son un array simple)
     STATE.pokemon.all = data;
+    
+    // 3. Renderiza (¡YA NO HAY PROMISE.ALL!)
     renderPokemons();
+
   } catch (e) {
     console.error(e);
     container.innerHTML = `<div class="p-6 text-center text-red-600 col-span-full">Error al cargar Pokémon</div>`;
   }
 }
+
 function initPokemonsUI() {
   const searchInput = document.getElementById("pokemon-search");
   const sortSelect = document.getElementById("pokemon-sort");
   const reloadBtn = document.getElementById("pokemon-reload");
+
+  // RECUERDA: Actualizar tu HTML para que el <select> tenga "level"
+  // <option value="level">Nivel</option>
+
   searchInput?.addEventListener("input", () => {
     clearTimeout(searchInput.timeout);
     searchInput.timeout = setTimeout(() => {
@@ -98,61 +109,47 @@ function initPokemonsUI() {
   });
 }
 
-// === 5. LÓGICA DE RECETAS (ACTUALIZADA) ===
-
-// 💡 CAMBIO: Esta tarjeta ahora muestra una Receta de tu API
-function recetaCard(receta) {
+// === 5. LÓGICA DE RECETAS (Para API Pública) ===
+// (Esta es la lógica antigua que SÍ funciona)
+function recetaCard(cat) {
   return `
-    <div class="card p-4 bg-white rounded-lg shadow-md text-left w-full">
-      <h3 class="font-bold text-lg mb-2">${receta.nombre}</h3>
-      <p class="font-semibold text-sm mb-1 capitalize">${receta.categoria}</p>
-      <p class="text-sm text-slate-600">${(receta.instrucciones || '').substring(0, 100)}...</p>
+    <div class="card p-4 bg-white rounded-lg shadow-md text-center">
+      <h3 class="font-bold">${cat.strCategory}</h3>
+      <img src="${cat.strCategoryThumb}" alt="${cat.strCategory}" class="mx-auto mb-2">
+      <p>${cat.strCategoryDescription.substring(0, 100)}...</p>
     </div>
   `;
 }
-
-// 💡 CAMBIO: El filtro ahora busca por 'nombre' de receta
 function renderRecetas() {
   const container = document.getElementById("recetas-info");
   if (!container) return;
-
   const search = STATE.recetas.search.toLowerCase();
-
-  let filtered = STATE.recetas.all.filter(receta =>
-    (receta.nombre || '').toLowerCase().includes(search)
+  let filtered = STATE.recetas.all.filter(cat =>
+    cat.strCategory.toLowerCase().includes(search)
   );
-
-  // El sort por 'name' (nombre) sigue siendo válido
-  filtered.sort((a, b) => (a.nombre || '').localeCompare(b.nombre || ''));
-
+  filtered.sort((a, b) => a.strCategory.localeCompare(b.strCategory));
   STATE.recetas.filtered = filtered;
   container.innerHTML = filtered.length
     ? filtered.map(recetaCard).join("")
-    : `<div class="p-6 text-center text-slate-500 col-span-full">No se encontraron recetas...</div>`;
+    : `<div class="p-6 text-center text-slate-500 col-span-full">No se encontraron categorías...</div>`;
 }
-
-// 💡 CAMBIO: Ahora llama a getRecetas() de tu nuevo js/recetas.js
 async function loadRecetas() {
   const container = document.getElementById("recetas-info");
   if (!container) return;
-  container.innerHTML = `<div class="p-6 text-center animate-pulse col-span-full">Cargando recetas...</div>`;
-
+  container.innerHTML = `<div class="p-6 text-center animate-pulse col-span-full">Cargando categorías...</div>`;
   try {
-    const data = await getRecetas(); // <-- Llama a tu nueva función
+    const data = await getCategories(); // <-- Llama a la API pública
     STATE.recetas.all = data;
     renderRecetas();
   } catch (e) {
     console.error(e);
-    container.innerHTML = `<div class="p-6 text-center text-red-600 col-span-full">Error al cargar recetas</div>`;
+    container.innerHTML = `<div class="p-6 text-center text-red-600 col-span-full">Error al cargar categorías</div>`;
   }
 }
-
-// (Esta función no cambia, sigue funcionando)
 function initRecetasUI() {
   const searchInput = document.getElementById("recetas-search");
   const sortSelect = document.getElementById("recetas-sort");
   const reloadBtn = document.getElementById("recetas-reload");
-
   searchInput?.addEventListener("input", () => {
     clearTimeout(searchInput.timeout);
     searchInput.timeout = setTimeout(() => {
@@ -160,11 +157,9 @@ function initRecetasUI() {
       renderRecetas();
     }, 300);
   });
-  
   sortSelect?.addEventListener("change", () => {
     renderRecetas();
   });
-
   reloadBtn?.addEventListener("click", () => {
     STATE.recetas.search = "";
     if (searchInput) searchInput.value = "";
@@ -172,8 +167,8 @@ function initRecetasUI() {
   });
 }
 
-// === 6. LÓGICA DE ANIME ===
-// (Esta sección no cambia, ya funciona con tu backend de NestJS)
+// === 6. LÓGICA DE ANIME (Para tu Backend NestJS) ===
+// (Esta lógica está actualizada para tu API de Nest)
 function animeCard(a) {
   let synopsis = '';
   if (a.synopsis) {
@@ -228,7 +223,7 @@ async function loadAnime() {
   if (!list) return;
   list.innerHTML = `<div class="animate-pulse py-6 text-center">Cargando animes...</div>`;
   try {
-    const data = await getAnimeNews({ page: STATE.anime.page, perPage: STATE.anime.perPage });
+    const data = await getAnimeNews({ page: STATE.anime.page, perPage: STATE.anime.perPage }); // <-- Llama a tu API de NestJS
     STATE.anime.all = data;
     renderAnimeList();
   } catch (e) {
@@ -256,8 +251,7 @@ function initAnimeUI() {
   }
 }
 
-// === 7. LÓGICA DE CRIPTO ===
-// (Esta sección no cambia)
+// === 7. LÓGICA DE CRIPTO (Para API Pública) ===
 function coinCard(c) {
   const change = c.price_change_percentage_24h;
   const color = change > 0 ? "text-green-600" : change < 0 ? "text-red-600" : "text-slate-600";
