@@ -9,7 +9,7 @@ function mapRecetaToCategory(r) {
     // dejamos TODOS los campos originales…
     ...r,
 
-    // …y además agregamos los “alias” que usaba antes el front
+    // …y además agregamos los "alias" que usaba antes el front
     idCategory: r.idCategory || r._id || r.id || null,
     strCategory: r.strCategory || r.categoria || r.nombre || "Sin nombre",
     strCategoryThumb:
