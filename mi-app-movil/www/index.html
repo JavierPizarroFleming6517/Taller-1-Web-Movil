@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menú Principal</title>
+  <title>InfoMóvil - Tu portal de información dinámica</title>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -17,68 +17,154 @@
       --color-bg3: #ffffff;
       --color-bg4: #c2c2c2;
     }
+    
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .animate-gradient {
+      background: linear-gradient(-45deg, #f5f5f5, #e8e8e8, #f0f0f0, #e5e5e5);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
+    
+    .card-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .card-shine:hover::before {
+      left: 100%;
+    }
   </style>
   
 </head>
-<body class="flex min-h-screen flex-col items-center p-0 sm:p-0" style="background: linear-gradient(135deg, var(--color-bg3), var(--color-bg4));">
+<body class="flex min-h-screen flex-col items-center p-0 sm:p-0 animate-gradient">
 
-  <!-- NUEVO ENCABEZADO A TODO LO ANCHO -->
-  <header class="w-full bg-[var(--color-primary-dark)] py-10 shadow-lg">
-    <h1 class="text-center text-4xl font-extrabold text-[var(--color-bg3)] sm:text-7xl">
-      InfoMóvil
+  <!-- ENCABEZADO CON GRADIENTE -->
+  <header class="w-full bg-gradient-to-r from-[var(--color-primary-dark)] via-[#1a1d2e] to-[var(--color-primary-dark)] py-12 shadow-2xl relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE0YzMuMzE0IDAgNi0yLjY4NiA2LTZzLTIuNjg2LTYtNi02LTYgMi42ODYtNiA2IDIuNjg2IDYgNiA2ek0xOCAzNGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNi02IDIuNjg2LTYgNiAyLjY4NiA2IDYgNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
+    <h1 class="relative text-center text-5xl font-extrabold text-[var(--color-bg3)] sm:text-7xl tracking-tight">
+      Info<span class="text-[var(--color-accent)]">Móvil</span>
     </h1>
+    <p class="relative text-center text-white/80 mt-2 text-sm sm:text-base font-light tracking-wide">Información en tiempo real a tu alcance</p>
   </header>
 
-  <main class="w-full max-w-4xl px-4 py-12 text-center sm:px-8">
-    <p class="mb-12 text-lg text-[var(--color-primary-dark)] font-semibold">Tu portal a un mundo de información dinámica y en tiempo real.</p>
+  <main class="w-full max-w-4xl px-4 py-8 sm:py-12 text-center sm:px-8">
+    <p class="mb-8 sm:mb-12 text-lg sm:text-xl text-[var(--color-primary-dark)] font-medium px-2">Tu portal a un mundo de <span class="text-[var(--color-accent)] font-bold">información dinámica</span> y en tiempo real.</p>
 
     <!-- GRID DE PROYECTOS -->
-    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <div class="grid grid-cols-1 gap-4 sm:gap-6">
 
       <!-- Pokédex -->
-      <a href="pokemones.html" class="group relative block overflow-hidden rounded-2xl border border-transparent bg-[var(--color-bg3)] p-8 text-left shadow-lg transition-all duration-300 hover:scale-105 hover:border-gray-400 hover:shadow-2xl">
-        <span class="absolute left-6 top-6 text-[var(--color-bg)]"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 100 20 10 10 0 000-20z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 8a4 4 0 100 8 4 4 0 000-8z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h4" /><path stroke-linecap="round" stroke-linejoin="round" d="M16 12h4" /></svg></span>
-        <span class="absolute right-6 top-6 text-[var(--color-bg)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg></span>
-        <div class="mt-16"><h2 class="mb-2 text-2xl font-bold text-[var(--color-primary-dark)]">Pokédex</h2>
-        <p class="text-[var(--color-primary-dark)]/80">Explora los Pokémon con la PokéAPI</p></div>
+      <a href="pokemones.html" class="card-shine group relative flex flex-col sm:flex-row items-center overflow-hidden rounded-2xl border-2 border-transparent bg-white p-4 sm:p-6 shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--color-accent)]/30 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-accent)] text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 mb-3 sm:mb-0 sm:mr-6 shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8a4 4 0 100 8 4 4 0 000-8z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h4" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 12h4" />
+          </svg>
+        </div>
+        <div class="flex-1 text-center sm:text-left">
+          <h2 class="mb-1 text-xl sm:text-2xl font-bold text-[var(--color-primary-dark)] group-hover:text-[var(--color-accent)] transition-colors">Pokédex</h2>
+          <p class="text-[var(--color-primary-dark)]/70 text-sm">Explora los Pokémon con la PokéAPI</p>
+        </div>
+        <div class="text-[var(--color-primary-dark)]/40 transition-all duration-300 group-hover:text-[var(--color-accent)] group-hover:translate-x-1 mt-3 sm:mt-0 sm:ml-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
       </a>
 
       <!-- Recetas -->
-      <a href="recetas.html" class="group relative block overflow-hidden rounded-2xl border border-transparent bg-[var(--color-bg3)] p-8 text-left shadow-lg transition-all duration-300 hover:scale-105 hover:border-gray-400 hover:shadow-2xl">
-        <span class="absolute left-6 top-6 text-[var(--color-bg)]"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg></span>
-        <span class="absolute right-6 top-6 text-[var(--color-bg)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg></span>
-        <div class="mt-16"><h2 class="mb-2 text-2xl font-bold text-[var(--color-primary-dark)]">Recetas</h2>
-        <p class="text-[var(--color-primary-dark)]/80">Encuentra recetas deliciosas y fáciles</p></div>
+      <a href="recetas.html" class="card-shine group relative flex flex-col sm:flex-row items-center overflow-hidden rounded-2xl border-2 border-transparent bg-white p-4 sm:p-6 shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--color-accent)]/30 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 mb-3 sm:mb-0 sm:mr-6 shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+          </svg>
+        </div>
+        <div class="flex-1 text-center sm:text-left">
+          <h2 class="mb-1 text-xl sm:text-2xl font-bold text-[var(--color-primary-dark)] group-hover:text-amber-600 transition-colors">Recetas</h2>
+          <p class="text-[var(--color-primary-dark)]/70 text-sm">Encuentra recetas deliciosas y fáciles</p>
+        </div>
+        <div class="text-[var(--color-primary-dark)]/40 transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1 mt-3 sm:mt-0 sm:ml-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
       </a>
 
       <!-- Top Anime -->
-      <a href="anime.html" class="group relative block overflow-hidden rounded-2xl border border-transparent bg-[var(--color-bg3)] p-8 text-left shadow-lg transition-all duration-300 hover:scale-105 hover:border-gray-400 hover:shadow-2xl">
-        <span class="absolute left-6 top-6 text-[var(--color-bg)]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg></span>
-        <span class="absolute right-6 top-6 text-[var(--color-bg)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg></span>
-        <div class="mt-16"><h2 class="mb-2 text-2xl font-bold text-[var(--color-primary-dark)]">Top Anime</h2>
-        <p class="text-[var(--color-primary-dark)]/80">Los mejores animes según la comunidad</p></div>
+      <a href="anime.html" class="card-shine group relative flex flex-col sm:flex-row items-center overflow-hidden rounded-2xl border-2 border-transparent bg-white p-4 sm:p-6 shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--color-accent)]/30 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 mb-3 sm:mb-0 sm:mr-6 shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-7 w-7 sm:h-8 sm:w-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+          </svg>
+        </div>
+        <div class="flex-1 text-center sm:text-left">
+          <h2 class="mb-1 text-xl sm:text-2xl font-bold text-[var(--color-primary-dark)] group-hover:text-purple-600 transition-colors">Top Anime</h2>
+          <p class="text-[var(--color-primary-dark)]/70 text-sm">Los mejores animes según la comunidad</p>
+        </div>
+        <div class="text-[var(--color-primary-dark)]/40 transition-all duration-300 group-hover:text-purple-600 group-hover:translate-x-1 mt-3 sm:mt-0 sm:ml-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
       </a>
     </div>
 
-    <!-- NUEVA TARJETA INFORMATIVA -->
-    <section class="mt-16 rounded-2xl bg-[var(--color-primary-dark)] p-8 text-left text-[var(--color-bg2)] shadow-lg">
-      <h2 class="mb-4 text-center text-3xl font-bold">Nuestra Misión</h2>
-      <p class="mb-8 text-center text-lg opacity-90">
+    <!-- TARJETA INFORMATIVA CON DISEÑO MEJORADO -->
+    <section class="mt-12 sm:mt-16 rounded-3xl bg-gradient-to-br from-[var(--color-primary-dark)] to-[#1a1d2e] p-6 sm:p-10 text-left text-[var(--color-bg2)] shadow-2xl border border-white/10">
+      <div class="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6">
+        <div class="w-12 h-1 bg-[var(--color-accent)] rounded-full mb-2 sm:mb-0 sm:mr-4"></div>
+        <h2 class="text-center text-2xl sm:text-3xl font-bold">Nuestra Misión</h2>
+        <div class="w-12 h-1 bg-[var(--color-accent)] rounded-full mt-2 sm:mt-0 sm:ml-4"></div>
+      </div>
+      <p class="mb-8 sm:mb-10 text-center text-base sm:text-lg opacity-90 leading-relaxed max-w-3xl mx-auto px-2">
         En InfoMóvil, nuestra misión es centralizar la información dinámica que más te interesa, presentándola de una manera rápida, clara y atractiva. Nuestra plataforma está diseñada para ofrecer una experiencia de usuario fluida e intuitiva, permitiéndote explorar un universo de datos sin interrupciones.
       </p>
 
-      <div class="grid grid-cols-1 gap-8 border-t border-white/20 pt-8 md:grid-cols-3">
-        <div>
-          <h3 class="mb-2 text-xl font-semibold">Tecnología de Vanguardia</h3>
-          <p class="opacity-80">Construimos con las últimas tecnologías web para garantizar una experiencia rápida y responsiva en cualquier dispositivo.</p>
+      <div class="grid grid-cols-1 gap-4 sm:gap-6 pt-6 sm:pt-8 md:grid-cols-3">
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[var(--color-accent)] rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="mb-2 sm:mb-3 text-lg sm:text-xl font-semibold">Tecnología de Vanguardia</h3>
+          <p class="opacity-80 leading-relaxed text-sm sm:text-base">Construimos con las últimas tecnologías web para garantizar una experiencia rápida y responsiva en cualquier dispositivo.</p>
         </div>
-        <div>
-          <h3 class="mb-2 text-xl font-semibold">Datos en Tiempo Real</h3>
-          <p class="opacity-80">Nos conectamos con múltiples fuentes de información líderes para ofrecerte datos actualizados al minuto.</p>
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[var(--color-accent)] rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="mb-2 sm:mb-3 text-lg sm:text-xl font-semibold">Datos en Tiempo Real</h3>
+          <p class="opacity-80 leading-relaxed text-sm sm:text-base">Nos conectamos con múltiples fuentes de información líderes para ofrecerte datos actualizados al minuto.</p>
         </div>
-        <div>
-          <h3 class="mb-2 text-xl font-semibold">Diseño Centrado en el Usuario</h3>
-          <p class="opacity-80">Creemos en interfaces intuitivas y un diseño completamente responsivo que se adapta a ti, ya sea en tu móvil, tablet o escritorio.</p>
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[var(--color-accent)] rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="mb-2 sm:mb-3 text-lg sm:text-xl font-semibold">Diseño Centrado en el Usuario</h3>
+          <p class="opacity-80 leading-relaxed text-sm sm:text-base">Creemos en interfaces intuitivas y un diseño completamente responsivo que se adapta a ti, ya sea en tu móvil, tablet o escritorio.</p>
         </div>
       </div>
     </section>

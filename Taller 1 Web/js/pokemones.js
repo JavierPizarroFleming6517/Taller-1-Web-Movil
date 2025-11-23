@@ -1,5 +1,4 @@
 // js/pokemones.js
-
 // Esta es la URL de TU backend de FastAPI
 const API_URL = "http://127.0.0.1:8000/pokemons";
 

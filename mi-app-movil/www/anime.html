@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Top Anime</title>
+  <title>Top Anime - InfoMóvil</title>
   <link rel="stylesheet" href="./styles.css">
 
   <!-- Paleta de Colores de tu Proyecto -->
@@ -19,13 +19,25 @@
       --color-bg3: #ffffff;
       --color-bg4: #c2c2c2;
     }
+    
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .animate-gradient {
+      background: linear-gradient(-45deg, #f5f5f5, #e8e8e8, #f0f0f0, #e5e5e5);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
   </style>
 
 </head>
-<body style="background: linear-gradient(135deg, var(--color-bg3), var(--color-bg4));">
+<body class="animate-gradient">
 
   <!-- Header con el nuevo estilo -->
-  <header class="w-full bg-[var(--color-primary-dark)] py-4 shadow-lg sticky top-0 z-50">
+  <header class="w-full bg-gradient-to-r from-[var(--color-primary-dark)] via-[#1a1d2e] to-[var(--color-primary-dark)] py-4 shadow-2xl sticky top-0 z-50 backdrop-blur-sm bg-opacity-95">
     <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       <!-- Menú Desktop -->
       <div class="hidden md:flex items-center space-x-6">
@@ -37,8 +49,8 @@
 
       <!-- Botón Menú Móvil -->
       <div class="md:hidden">
-        <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-300 hover:bg-white/10" aria-label="Abrir menú">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m4 6h16"/></svg>
+        <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-300 hover:bg-white/10 transition-colors" aria-label="Abrir menú">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
     </nav>
@@ -46,44 +58,59 @@
     <!-- Menú Móvil Desplegable -->
     <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-primary-dark)] mt-2">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./index.html">Inicio</a>
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./pokemones.html">Pokémon</a>
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./recetas.html">Recetas</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors" href="./index.html">Inicio</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors" href="./pokemones.html">Pokémon</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors" href="./recetas.html">Recetas</a>
         <a class="block px-3 py-2 rounded-md text-base font-medium text-white bg-white/10" href="./anime.html">Top Anime</a>
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white" href="./cripto.html">Criptomonedas</a>
       </div>
     </div>
   </header>
 
-  <main class="w-full max-w-7xl mx-auto px-4 py-12" id="anime-root">
+  <main class="w-full max-w-7xl mx-auto px-3 sm:px-4 py-8 sm:py-12" id="anime-root">
     <!-- Segmento: Título y descripción -->
-    <section class="mb-10 text-center">
-      <h1 class="text-4xl font-bold text-[var(--color-primary-dark)] md:text-5xl">Top Anime</h1>
-      <p class="mt-2 text-lg font-semibold text-[var(--color-primary-dark)]">Lista de los animes mejor calificados según MyAnimeList.</p>
+    <section class="mb-8 sm:mb-10 text-center px-2">
+      <div class="inline-block">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-primary-dark)] mb-2">
+          Top <span class="text-purple-600">Anime</span>
+        </h1>
+        <div class="h-1 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full"></div>
+      </div>
+      <p class="mt-3 sm:mt-4 text-base sm:text-lg font-semibold text-[var(--color-primary-dark)]">Lista de los animes mejor calificados según MyAnimeList.</p>
     </section>
 
     <!-- Segmento: Controles de búsqueda y orden -->
-    <section class="mb-10 flex justify-center">
-      <div class="flex flex-col sm:flex-row gap-4 w-full max-w-xl">
-        <input id="anime-search" type="text" class="w-full rounded-xl border-gray-300 bg-white/80 px-4 py-2 text-[var(--color-primary-dark)] shadow-sm transition-all placeholder:text-gray-400 focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]" placeholder="Buscar anime...">
-        <select id="anime-sort" class="w-full sm:w-56 rounded-xl border-gray-300 bg-white/80 px-4 py-2 text-[var(--color-primary-dark)] shadow-sm transition-all focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]">
-          <option value="score">⭐ Puntuación</option>
-          <option value="title">📝 Título</option>
-          <option value="year">📅 Año</option>
-          <option value="episodes">🎬 Episodios</option>
-        </select>
-        <button id="recetas-reload" class="px-6 py-2 bg-gray-300 text-[var(--color-primary-dark)] font-semibold rounded-lg shadow-md transition-all hover:bg-gray-400">Recargar</button>
+    <section class="mb-8 sm:mb-10 flex justify-center px-2">
+      <div class="flex flex-col gap-3 sm:gap-4 w-full max-w-2xl bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-xl border border-white/60">
+        <input 
+          id="anime-search" 
+          type="text" 
+          class="w-full rounded-xl border-2 border-gray-200 bg-white px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-[var(--color-primary-dark)] shadow-sm transition-all placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none" 
+          placeholder="🔍 Buscar anime...">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <select 
+            id="anime-sort" 
+            class="flex-1 rounded-xl border-2 border-gray-200 bg-white px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-[var(--color-primary-dark)] shadow-sm transition-all focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none font-medium">
+            <option value="score">⭐ Puntuación</option>
+            <option value="title">📝 Título</option>
+            <option value="year">📅 Año</option>
+            <option value="episodes">🎬 Episodios</option>
+          </select>
+          <button 
+            id="recetas-reload" 
+            class="px-5 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-sm sm:text-base font-semibold rounded-xl shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95">
+            🔄 Recargar
+          </button>
+        </div>
       </div>
     </section>
 
     <!-- Segmento: Lista de animes -->
-    <section id="anime-list">
+    <section id="anime-list" class="px-2">
       <!-- Las tarjetas de anime se renderizan aquí desde JS -->
     </section>
 
-    
-
   </main>
+
   <script type="module">
     import "./js/anime.js";
     // Menú móvil toggle
